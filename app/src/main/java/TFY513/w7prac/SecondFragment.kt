@@ -61,12 +61,12 @@ class SecondFragment : Fragment() {
         val preferences = activity?.getPreferences(Context.MODE_PRIVATE)
         if(preferences != null){
             if(preferences.contains(getString(R.string.name))){
-                binding.ediTextTextName.setText(
+                binding.editTextTextName.setText(
                     preferences.getString(getString(R.string.name), ""))
 
                 //OR
-                binding.ediTextTextName.setText(
-                    preferences.getString("name", ""))
+//                binding.editTextTextName.setText(
+//                    preferences.getString("name", ""))
             }
             if(preferences.contains(getString(R.string.phone))){
                 binding.editTextPhone.setText(
@@ -81,9 +81,9 @@ class SecondFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.findItem(R.id.action_save).isVisible =  true
-        menu.findItem(R.id.action_profile).isVisible = true
-        menu.findItem(R.id.action_add).isVisible = true
-        menu.findItem(R.id.action_settings).isVisible = true
+        menu.findItem(R.id.action_profile).isVisible = false
+        menu.findItem(R.id.action_add).isVisible = false
+        menu.findItem(R.id.action_settings).isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -106,9 +106,10 @@ class SecondFragment : Fragment() {
         val preferences = activity?.getPreferences(Context.MODE_PRIVATE)
         if (preferences != null){
             with(preferences.edit()){
-                putString("name", binding.ediTextTextName.text.toString())
-                putString("phone", binding.editTextPhone.text.toString())
+                putString(getString(R.string.name), binding.editTextTextName.text.toString())
+                putString(getString(R.string.phone), binding.editTextPhone.text.toString())
             }.apply()
+
         }
 
     }
